@@ -71,11 +71,11 @@ export default function PlayMenu() {
             </div>
 
             <div className="flex justify-center items-start">
-              <Label className="flex mr-2 text-stone-500">0:00</Label>
+              <Label className="flex mr-[10px] text-stone-500">1:22</Label>
 
-              <Slider defaultValue={[0]} max={100} step={1} className="flex mt-2 min-w-[350px] w-[34vw]" />
+              <Slider defaultValue={[43]} max={100} step={1} className="flex mt-2 min-w-[350px] w-[34vw]" />
 
-              <Label className="flex ml-2 text-stone-500">3:12</Label>
+              <Label className="flex ml-[10px] text-stone-500">3:12</Label>
             </div>
 
           </div>
