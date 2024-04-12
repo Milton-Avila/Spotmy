@@ -10,12 +10,16 @@ import { FaPauseCircle, FaPlayCircle } from "react-icons/fa"
 import { Label } from "@/components/ui/label";
 
 export default function PlayMenu() {
-  const [playing, setPlaying] = useState('pause')
-  const [timeLine, setTimeline] = useState('0')
-  const [shuffleEnableOn, setShuffleEnabelOn] = useState(true) // Turn to False
-  const [shuffleOn, setShuffleOn] = useState('false')
-  const [repeatEnableOn, setRepeatEnableOn] = useState(true)  // Turn to False
-  const [repeatOn, setRepeatOn] = useState(false)
+  const [playing, setPlaying] = useState<string>('pause')
+  const [songLen, setSongLen] = useState<number>(192) // Change default value
+  const [songStep, setSongStep] = useState<number>(43) // Change default value
+  const [shuffleEnableOn, setShuffleEnabelOn] = useState<boolean>(true) // Turn to False
+  const [shuffleOn, setShuffleOn] = useState<string>('false')
+  const [repeatEnableOn, setRepeatEnableOn] = useState<boolean>(true)  // Turn to False
+  const [repeatOn, setRepeatOn] = useState<boolean>(false)
+  const handleSliderChange = (event: any, newValue: number) => {
+    setSongStep(newValue); // Atualiza o estado com o novo valor do Slider
+  };
 
   return(
     <>
@@ -71,11 +75,11 @@ export default function PlayMenu() {
             </div>
 
             <div className="flex justify-center items-start">
-              <Label className="flex mr-[10px] text-stone-500">1:22</Label>
+              <Label className="flex mr-[10px] text-stone-500">{Math.floor(songStep/60) + ":" + songStep%60}</Label>
 
-              <Slider defaultValue={[43]} max={100} step={1} className="flex mt-2 min-w-[350px] w-[34vw]" />
+              <Slider defaultValue={[songStep]} onValueChange={(eve: any) => {setSongStep(eve)}} max={songLen} step={1} className="flex mt-2 min-w-[350px] w-[34vw]"/>
 
-              <Label className="flex ml-[10px] text-stone-500">3:12</Label>
+              <Label className="flex ml-[10px] text-stone-500">{Math.floor(songLen/60) + ":" + songLen%60}</Label>
             </div>
 
           </div>
