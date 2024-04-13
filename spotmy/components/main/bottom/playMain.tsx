@@ -12,13 +12,13 @@ import { Label } from "@/components/ui/label";
 export default function PlayMenu() {
   const [playing, setPlaying] = useState<string>('pause')
   const [songLen, setSongLen] = useState<number>(192) // Change default value
-  const [songStep, setSongStep] = useState<number>(43) // Change default value
+  const [BarVal, setBarVal] = useState<number>(43) // Change default value
   const [shuffleEnableOn, setShuffleEnabelOn] = useState<boolean>(true) // Turn to False
   const [shuffleOn, setShuffleOn] = useState<string>('false')
   const [repeatEnableOn, setRepeatEnableOn] = useState<boolean>(true)  // Turn to False
   const [repeatOn, setRepeatOn] = useState<boolean>(false)
   const handleSliderChange = (event: any, newValue: number) => {
-    setSongStep(newValue); // Atualiza o estado com o novo valor do Slider
+    setBarVal(newValue); // Atualiza o estado com o novo valor do Slider
   };
 
   return(
@@ -75,9 +75,9 @@ export default function PlayMenu() {
             </div>
 
             <div className="flex justify-center items-start">
-              <Label className="flex mr-[10px] text-stone-500">{Math.floor(songStep/60) + ":" + songStep%60}</Label>
+              <Label className="flex mr-[10px] text-stone-500">{Math.floor(BarVal/60) + ":" + (BarVal%60<10 ? `0${BarVal%60}` : BarVal%60)}</Label>
 
-              <Slider defaultValue={[songStep]} onValueChange={(eve: any) => {setSongStep(eve)}} max={songLen} step={1} className="flex mt-2 min-w-[350px] w-[34vw]"/>
+              <Slider defaultValue={[BarVal]} onValueChange={(eve: any) => {setBarVal(eve)}} max={songLen} step={1} className="flex mt-2 min-w-[350px] w-[34vw]"/>
 
               <Label className="flex ml-[10px] text-stone-500">{Math.floor(songLen/60) + ":" + songLen%60}</Label>
             </div>
