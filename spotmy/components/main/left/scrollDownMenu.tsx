@@ -11,7 +11,7 @@ export default function ScrollDownMenu() {
 
       <div className="rounded-lg bg-[#121212] px-[2%] h-full">
 
-        
+        <Label> {} </Label>
 
       </div>
 

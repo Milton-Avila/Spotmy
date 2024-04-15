@@ -1,8 +1,9 @@
 'use client'
 
-import React from "react"
+import React, { useContext } from "react"
 
 export default function InterfaceMain() {
+
   return (
     <>
       <div className="col-span-11 rounded-lg py-[9px] my-[9px] bg-[#121212]">
