@@ -5,7 +5,7 @@ import { Label } from "../../ui/label";
 import { Button } from "../../ui/button";
 import { GoHome, GoHomeFill } from "react-icons/go";
 import { BiSearch, BiSolidSearch } from "react-icons/bi";
-import StyleInjector from "@/components/structures/StyleInjector";
+import StyleInjector from "@/components/structures/styleInjector";
 
 export default function TopMenu() {
   const [selected, setSelected] = useState('home');
