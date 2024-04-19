@@ -149,6 +149,7 @@ export default function PlayMenu() {
               <Label className="flex mr-[10px] text-stone-500 w-[29px] justify-end">{Math.floor(songCur/60) + ":" + (barRest<10 ? `0${barRest}` : barRest)}</Label>
 
               <Slider
+                value={[songCur]}
                 defaultValue={[songCur]}
                 onValueChange={(even: any) => {handleChangeCurrentHold(even)}}
                 onClick={() => {handleChangeCurrentClick()}}

@@ -12,12 +12,16 @@
 # next.js
 /.next/
 /out/
+package-lock.json
 
 # production
 /build
+dist/
+*.log
 
 # misc
 .DS_Store
+.vscode/
 *.pem
 
 # debug
@@ -34,3 +38,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editor
+.idea/
+*.iml
