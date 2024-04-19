@@ -62,10 +62,8 @@ export default function PlayMenu() {
     });
     
     song.addEventListener('timeupdate', () => {
-      if (!changingCurrent) {
-        let currentTimeInSeconds = song.currentTime;
-        setsongCur(currentTimeInSeconds)
-      }
+      let currentTimeInSeconds = (changingCurrent ? selectedCur : song.currentTime) ;
+      setsongCur(currentTimeInSeconds)
     });
   }
   
@@ -93,8 +91,8 @@ export default function PlayMenu() {
 
   return(
     <>
-        <div className="flex flex-grow select-none">
-          <div className="grid columns-2 w-full">
+        <div className="flex flex-grow select-none absolute w-[99vw] mt-1">
+          <div className="grid columns-2 w-full gap-y-1">
 
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-5 gap-x-[6px]">
@@ -151,8 +149,8 @@ export default function PlayMenu() {
               <Slider
                 value={[songCur]}
                 defaultValue={[songCur]}
-                onValueChange={(even: any) => {handleChangeCurrentHold(even)}}
-                onClick={() => {handleChangeCurrentClick()}}
+                onValueChange={(even: any) => handleChangeCurrentHold(even)}
+                onClick={() => handleChangeCurrentClick()}
                 max={songDur}
                 step={1}
                 className="flex mt-[5px] min-w-[350px] w-[34vw]"/>
