@@ -12,21 +12,23 @@ import { PlayingSongContext } from "@/contexts/playingSong";
 
 export default function PlayMenu() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const [songDur, setSongDur] = useState<number>(0);                    // Change default value
-  const [songCur, setsongCur] = useState<number>(0);                       // Change default value
+  const [songDur, setSongDur] = useState<number>(0);
+  const [songCur, setsongCur] = useState<number>(0);
+  const [songLoaded, setSongLoaded] = useState<boolean>(false);
   const [changingCurrent, setChangingCurrent] = useState<boolean>(false);
   const [selectedCur, setSelectedCur] = useState<number>(0);
-  const [shuffleEnableOn, setShuffleEnabelOn] = useState<boolean>(true);  // Turn to False
+  const [shuffleEnableOn, setShuffleEnabelOn] = useState<boolean>(true);     // Turn to False
   const [shuffleOn, setShuffleOn] = useState<string>('false');
-  const [repeatEnableOn, setRepeatEnableOn] = useState<boolean>(true);    // Turn to False
+  const [repeatEnableOn, setRepeatEnableOn] = useState<boolean>(true);       // Turn to False
   const [repeatOn, setRepeatOn] = useState<boolean>(false);
   const [song, setSong] = useState<HTMLAudioElement|null>(null);
   const playingSong = useContext(PlayingSongContext);
   let barRest = Math.round(songCur%60);
 
-  const handleSong = async (src: string) => {
+  const handleSong = async () => {
     try {
-      const songModule = await import("@/data/songs/snuff.mp3");
+      const songModule = await import("@public/snuff.mp3");  // Fix somehow
+      setSongLoaded(true);
   
       if (typeof songModule.default === "string") {
         setSong(new Audio(songModule.default));
@@ -54,11 +56,22 @@ export default function PlayMenu() {
     }
     setChangingCurrent(false)
   }
+  
+  const CreateEnder = () => {
+    if (song != null) {
+      song.addEventListener('timeupdate', () => {
+        if (song.currentTime >= song.duration-0.5) {
+          handleEnd()
+        }
+      });
+    }
+  }
 
   if (song != null) {
     song.addEventListener('loadedmetadata', () => {
       const durationInSeconds = song.duration;
       setSongDur(durationInSeconds)
+      CreateEnder()
     });
     
     song.addEventListener('timeupdate', () => {
@@ -68,7 +81,7 @@ export default function PlayMenu() {
   }
   
   useEffect(() => {
-    handleSong(playingSong.src);
+    handleSong();
   }, [playingSong.src]);
 
   const handlePlay = () => {
@@ -81,8 +94,40 @@ export default function PlayMenu() {
     song?.pause()
   }
 
+  const handleBackSkip = () => {
+    if (songCur<3) {
+      // Previous song
+    } else {
+      handleRestart()
+      song?.play()
+    }
+  }
+
+  const handleFrontSkip = () => {
+    if (song != null) {
+      handleEnd()
+    }
+  }
+
+  const handleNextSong = () => {
+    if (false) { // Is there a next song?
+      return false
+    } else {
+      return true
+    }
+  }
+
   const handleEnd = () => {
-    setIsPlaying(false)
+    if (song != null) {
+      let end = handleNextSong()
+      if (end) {
+        setIsPlaying(false)
+        handleRestart()
+      }
+    }
+  }
+
+  const handleRestart = () => {
     if (song != null) {
       song.pause()
       song.currentTime = 0
@@ -99,7 +144,7 @@ export default function PlayMenu() {
 
                 <div className="text-white duration-100 h-2">
                   {
-                    !shuffleEnableOn 
+                    !shuffleEnableOn
                     ? <LuShuffle className="text-[19px] duration-100 mt-[6px] mx-auto text-stone-700"/>
                     : shuffleOn == 'false'
                     ? <LuShuffle onClick={() => setShuffleOn('normal')} className="text-[19px] duration-100 mt-[6px] mx-auto hover:text-white hover:cursor-pointer text-stone-400"/>
@@ -111,21 +156,21 @@ export default function PlayMenu() {
 
                 <div className="text-white duration-100">
                   {
-                    <BsFillSkipStartFill className="text-stone-400 hover:text-white text-[26px] duration-100 hover:cursor-pointer mt-[2px]"/>
+                    <BsFillSkipStartFill onClick={handleBackSkip} className="text-stone-400 hover:text-white text-[26px] duration-100 hover:cursor-pointer mt-[2px]"/>
                   }
                 </div>
 
                 <div className="text-white duration-100">
                   {
                     !isPlaying ? 
-                    (<FaPlayCircle onClick={handlePlay} className="text-[34px] hover:scale-[110%] duration-100 hover:cursor-pointer"/>) : 
+                    (<FaPlayCircle onClick={songLoaded ? handlePlay : (()=>{})} className="text-[34px] hover:scale-[110%] duration-100 hover:cursor-pointer"/>) : 
                     (<FaPauseCircle onClick={handlePause} className="text-[34px] hover:scale-[110%] duration-100 hover:cursor-pointer"/>)
                   }
                 </div>
                 
                 <div className="text-white duration-100 align-middle">
                   {
-                    <BsFillSkipStartFill className="text-stone-400 hover:text-white rotate-[180deg] text-[26px] duration-100 hover:cursor-pointer float-end mt-[2px]"/>
+                    <BsFillSkipStartFill onClick={handleFrontSkip} className="text-stone-400 hover:text-white rotate-[180deg] text-[26px] duration-100 hover:cursor-pointer float-end mt-[2px]"/>
                   }
                 </div>
 

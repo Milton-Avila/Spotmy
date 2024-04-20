@@ -5,13 +5,13 @@ import InterfaceRight from "@/components/main/right/interface";
 import InterfaceMain from "@/components/main/main/interface";
 import InterfaceBottom from "@/components/main/bottom/interface";
 import { PlayingSongContext } from "@/contexts/playingSong";
-import { songs } from "@/data/songsData";
+import { songsData } from "../../public/data/songsData";
 
 export default function Home() {
 
   return (
 
-    <PlayingSongContext.Provider value={songs[0]}>
+    <PlayingSongContext.Provider value={songsData[0]}>
 
       <div className='h-screen flex flex-col'>
         

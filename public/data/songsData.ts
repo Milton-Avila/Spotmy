@@ -1,10 +1,10 @@
 import { songInterface } from "@/interfaces/songsData";
 
-export const songs: songInterface[] = [
+export const songsData: songInterface[] = [
     {
         name: "Snuff",
         artist: "Slipknot",
-        src: "../../../data/songs/snuff.mp3",
-        coverSrc: ""
+        src: "@public/snuff.mp3",
+        coverSrc: "/data/imgs/snuff.jpg"
     }
 ]
