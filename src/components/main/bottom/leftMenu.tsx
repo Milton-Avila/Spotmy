@@ -1,36 +1,41 @@
 'use client'
 
-import React, { useContext, useState } from "react"
+import Image from 'next/image'
+import React, { useContext, useEffect, useState } from "react"
 import { Label } from "@/components/ui/label";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { PlayingSongContext } from "@/contexts/playingSong";
-import StyleInjector from "@/components/structures/styleInjector";
+import { songsData } from '@public/data/songsData';
+import { songInterface } from '@/interfaces/songsDataInterface';
+import { PlayingSongContext } from '@/contexts/playingSong';
 
 export default function LeftMenu() {
-  const playingSong = useContext(PlayingSongContext);
+  const playingSong = useContext<songInterface>(PlayingSongContext);
+  const [cover, setCover] = useState<string>("/data/" + songsData[playingSong.albumId].src + "cover.jpg");
 
   return(
     <>
     
-      <div className="grid columns-2 bottom-0">
+      <div className="grid columns-2 bottom-0 gap-x-[30px]">
 
         <div className="flex ">
           <div className="w-20 h-20 -mt-[7px] -ml-1">
 
-            <img
-              src={playingSong.coverSrc}
-              alt="Song cover"
-              className="scale-[0.7] rounded-sm"
+            <Image
+              id="require-static"
+              src={cover}
+              alt="Song Cover"
+              className="scale-[0.7] rounded-md"
+              width={100}
+              height={100}
+              priority
             />
 
           </div>
 
-          <StyleInjector style="underline cursor-pointer">
-            <div className="grid mb-auto mt-5 grid-flow-row gap-y-1">
-              <Label className="text-stone-200">{playingSong.name}</Label>
-              <Label className="text-stone-500">{playingSong.artist}</Label>
-            </div>
-          </StyleInjector>
+          <div className="grid mb-auto mt-5 grid-flow-row gap-y-1 max-w-[220px] overflow-x-hidden overflow-y-hidden">
+            <Label className="text-stone-200 hover:underline cursor-pointer">{playingSong.name}</Label>
+            <Label className="text-stone-400 hover:underline text-xs cursor-pointer">{songsData[playingSong.albumId].artist}</Label>
+          </div>
 
           <IoMdAddCircleOutline className="my-auto ml-4 size-5 text-stone-500 hover:text-stone-200 hover:cursor-pointer"/>
         </div>

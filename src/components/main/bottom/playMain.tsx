@@ -8,6 +8,7 @@ import { TbPointFilled } from "react-icons/tb";
 import { BsFillSkipStartFill } from "react-icons/bs";
 import { LuRepeat, LuShuffle } from "react-icons/lu";
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
+import { songsData } from "@public/data/songsData";
 import { PlayingSongContext } from "@/contexts/playingSong";
 
 export default function PlayMenu() {
@@ -27,7 +28,7 @@ export default function PlayMenu() {
 
   const handleSong = async () => {
     try {
-      const songModule = await import("@public/snuff.mp3");  // Fix somehow
+      const songModule = await import("@/../public/data/" + songsData[playingSong.albumId].src + playingSong.src);
       setSongLoaded(true);
   
       if (typeof songModule.default === "string") {
@@ -81,17 +82,23 @@ export default function PlayMenu() {
   }
   
   useEffect(() => {
-    handleSong();
-  }, [playingSong.src]);
+    handleSong()
+  }, [playingSong.src])
 
   const handlePlay = () => {
-    setIsPlaying(!isPlaying)
-    song?.play();
+    setIsPlaying(true)
+    song?.play()
   }
 
   const handlePause = () => {
-    setIsPlaying(!isPlaying)
+    setIsPlaying(false)
     song?.pause()
+  }
+
+  const handleRestart = () => {
+    if (song != null) {
+      song.currentTime = 0
+    }
   }
 
   const handleBackSkip = () => {
@@ -99,7 +106,6 @@ export default function PlayMenu() {
       // Previous song
     } else {
       handleRestart()
-      song?.play()
     }
   }
 
@@ -110,8 +116,14 @@ export default function PlayMenu() {
   }
 
   const handleNextSong = () => {
-    if (false) { // Is there a next song?
+    if (repeatOn) {
+      handleRestart()
       return false
+
+    } else if (songsData[playingSong.albumId].songs.length >= playingSong.songId) { // Is there a next song?
+      // useContext(PlayingSongContext) = songsData[playingSong.albumId].songs[playingSong.songId + 1]
+      return false
+
     } else {
       return true
     }
@@ -123,14 +135,8 @@ export default function PlayMenu() {
       if (end) {
         setIsPlaying(false)
         handleRestart()
+        handlePause()
       }
-    }
-  }
-
-  const handleRestart = () => {
-    if (song != null) {
-      song.pause()
-      song.currentTime = 0
     }
   }
 
