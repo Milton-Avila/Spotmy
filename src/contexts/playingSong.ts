@@ -1,7 +1,7 @@
-import { songInterface } from "@/interfaces/songsData";
-import { createContext } from "react";
-import { songsData } from "@public/data/songsData";
+import { songInterface } from "@/interfaces/songsDataInterface"
+import { songsData } from "@public/data/songsData"
+import { createContext, useState } from "react"
 
-const PlayingSongContext = createContext<songInterface>(songsData[0])
+const PlayingSongContext = createContext<songInterface>(songsData[1].songs[2])
 
 export { PlayingSongContext }

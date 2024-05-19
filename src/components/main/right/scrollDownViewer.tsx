@@ -9,7 +9,7 @@ export default function ScrollDownViewer() {
   return (
     <>
 
-      <div className="rounded-lg bg-[#121212] px-[2%] h-full">
+      <div className="px-[2%] h-full">
 
         
 
