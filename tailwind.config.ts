@@ -27,15 +27,16 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        marquee: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-100%)' },
+        marqueeOnce: {
+          '0%': { transform: 'translateX(0)' },
+          '40%, 54%': { transform: 'translateX(calc(-22%))' }, // Make dynamic somehow 
+          '100%': { transform: 'translateX(0)' },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        marquee: 'marquee 15s linear infinite',
+        marqueeOnce: 'marqueeOnce 8s linear',
       },
       gridColumn: {
         'span-15': 'span 15 / span 15',

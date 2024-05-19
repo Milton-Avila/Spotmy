@@ -9,7 +9,7 @@ export default function InterfaceBottom() {
   return (
     <>
 
-      <div className="flex h-[82px] px-2">
+      <div className="flex h-[82px] px-2 w-full">
 
         <LeftMenu/>
         

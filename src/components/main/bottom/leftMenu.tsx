@@ -15,24 +15,20 @@ export default function LeftMenu() {
   return(
     <>
     
-      <div className="grid columns-2 bottom-0 gap-x-[30px]">
+      <div className="grid columns-2 bottom-0 gap-x-[30px] absolute">
 
         <div className="flex ">
           <div className="w-20 h-20 -mt-[7px] -ml-1">
 
-            <Image
-              id="require-static"
+            <img
               src={cover}
               alt="Song Cover"
               className="scale-[0.7] rounded-md"
-              width={100}
-              height={100}
-              priority
             />
 
           </div>
 
-          <div className="grid mb-auto mt-5 grid-flow-row gap-y-1 max-w-[220px] overflow-x-hidden overflow-y-hidden">
+          <div className="grid mb-auto mt-5 grid-flow-row gap-y-1 max-w-[20vw] overflow-x-hidden whitespace-nowrap">
             <Label className="text-stone-200 hover:underline cursor-pointer">{playingSong.name}</Label>
             <Label className="text-stone-400 hover:underline text-xs cursor-pointer">{songsData[playingSong.albumId].artist}</Label>
           </div>
