@@ -4,7 +4,10 @@ export const songsData: album[] = [
   {
     name: "All Hope Is Gone",
     artist: "Slipknot",
+    artistSrc: "SlipknotSrc.jpg",
+    artistDescription: "",
     src: "Slipknot/",
+    montlyListeners: "13.459.244",
     songs: [
       {
         name: "Snuff",
@@ -17,7 +20,10 @@ export const songsData: album[] = [
   {
     name: "Whatever People Say I Am, That's What I'm Not",
     artist: "Arctic Monkeys",
+    artistSrc: "Arctic MonkeysSrc.jpg",
+    artistDescription: "With their nervy and literate indie rock sound, Arctic Monkeys are a respected, adventurous, and successful group that could easily be called Britain's biggest band of the early 21st century.",
     src: "Arctic Monkeys/",
+    montlyListeners: "49.702.449",
     songs: [
       {
         name: "Dancing Shoes",

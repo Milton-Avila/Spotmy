@@ -29,8 +29,6 @@ export default function PlayMenu() {
   const handleSong = async () => {
     try {
       const songModule = await import("@/../public/data/" + songsData[playingSong.albumId].src + playingSong.src)
-      setShuffleEnabelOn(true)
-      setRepeatEnableOn(true)
       setSongLoaded(true)
   
       if (typeof songModule.default === "string") {

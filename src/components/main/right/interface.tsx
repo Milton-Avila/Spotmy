@@ -7,7 +7,7 @@ import SongHeader from "./songHeader"
 export default function InterfaceRight() {
   return (
     <>
-      <div className="flex flex-col col-span-5 my-[9px] px-[16px] py-[9px] rounded-lg bg-[#121212]">
+      <div className="flex flex-col col-span-4 my-[9px] px-[16px] py-[9px] rounded-lg bg-[#121212]">
 
         <SongHeader/>
 

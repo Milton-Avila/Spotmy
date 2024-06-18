@@ -39,7 +39,7 @@ const config = {
         marqueeOnce: 'marqueeOnce 8s linear',
       },
       gridColumn: {
-        'span-15': 'span 15 / span 15',
+        'span-16': 'span 16 / span 16',
       },
       gridTemplateColumns: {
         // Simple n column grid
