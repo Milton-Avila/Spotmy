@@ -12,6 +12,7 @@ import { songsData } from "@public/data/songsData";
 
 export default function SongHeader() {
   const playingSong = useContext<songInterface>(PlayingSongContext);
+  const [songName, setSongName] = useState<string>(songsData[playingSong.albumId].name)
   const [albumNameHover, setAlbumNameHover] = useState<boolean>(false);
 
   useEffect(()=>{
@@ -32,7 +33,7 @@ export default function SongHeader() {
         <div className="max-w-[87%] overflow-hidden whitespace-nowrap marquee-conteiner">
           <div className={`inline-block ${albumNameHover && 'animate-marqueeOnce'}`} onMouseEnter={()=>{setAlbumNameHover(true)}}>
 
-            <Label className="hover:underline cursor-pointer text-base font-bold"> {songsData[playingSong.albumId].name} </Label>
+            <Label className="hover:underline cursor-pointer text-base font-bold"> {songName} </Label>
 
           </div>
         </div>

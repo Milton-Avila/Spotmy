@@ -19,6 +19,7 @@ export default function ScrollDownViewer() {
   const [songArtistDescription, setSongArtistDescription] = useState<string>(songsData[playingSong.albumId].artistDescription)
   const [songCover, setSongCover] = useState<string>("/data/" + songsData[playingSong.albumId].src + "cover.jpg");
   const [songMontlyLiteners, setSongMontlyListeners] = useState<string>(songsData[playingSong.albumId].montlyListeners);
+  const [following, setFollowing] = useState<boolean>(false)
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function ScrollDownViewer() {
         <div className="h-[170px] pl-1 pt-4 group bg-[#242424] rounded-b-lg cursor-pointer *:cursor-pointer">
           <Label className="flex font-bold mx-3 text-md"> {songArtist} </Label>
           <Label className="flex font-medium mx-3 mt-2 text-[15px] text-stone-400"> {songMontlyLiteners} montly listeners </Label>
-          <Button variant="outline" className="flex mr-4 mt-[-30px] ml-auto rounded-full font-bold border-[1px] hover:border-stone-200 hover:scale-[1.05] border-stone-500 he px-[16px]"> Following </Button>
+          <Button onClick={()=>{setFollowing(!following)}} variant="outline" className="flex mr-4 mt-[-30px] ml-auto rounded-full font-bold border-[1px] h-[36px] hover:border-stone-200 hover:scale-[1.05] border-stone-500 px-[16px] active:scale-[0.95]"> {following ? 'Following' : 'Follow'} </Button>
           <Label className="flex font-medium ml-3 mr-4 mt-2 text-[14px] text-stone-400 line-clamp-3"> {songArtistDescription} montly listeners </Label>
         </div>
 
