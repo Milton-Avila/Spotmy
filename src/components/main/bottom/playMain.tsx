@@ -41,14 +41,14 @@ export default function PlayMenu() {
     }
   }
 
-//   useEffect(() => {
-//     handleSongChange()
-//     handleSong()
-//   }, [playingSong?.songInfo.song])
+  useEffect(() => {
+    handleSongChange()
+    handleSong()
+  }, [playingSong?.songInfo.song])
 
-//   const handleSongChange = () => {
+  const handleSongChange = () => {
 
-//   }
+  }
 
   const handleSong = async () => {
     try {
