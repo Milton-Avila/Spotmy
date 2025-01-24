@@ -3,11 +3,12 @@ import { Dispatch, SetStateAction } from "react";
 interface songInterface {
   name: string;
   src: string;
-  albumId: number;
   songId: number;
+  songLiked: boolean;
 }
 
-interface album {
+interface albumInterface {
+  albumId: number;
   name: string;
   artist: string;
   artistSrc: string;
@@ -17,9 +18,9 @@ interface album {
   songs: songInterface[];
 }
 
-interface playingSongInterface{
+interface playingSongInterface {
   value: [playingSong: songInterface,
-  setPlayingSong: Dispatch<SetStateAction<songInterface>>]
+    setPlayingSong: Dispatch<SetStateAction<songInterface>>]
 }
 
-export type { songInterface, album, playingSongInterface }
+export type { songInterface, albumInterface, playingSongInterface }
