@@ -6,7 +6,7 @@ import React from "react"
 // Local
 import LeftMenu from "./leftMenu";
 import PlayMain from "./playMain";
-import RightMenu from "./rightMenu";
+// import RightMenu from "./rightMenu";
 
 export default function InterfaceBottom() {
 
